@@ -1,0 +1,30 @@
+#### Todas las reparaciones
+GET http://localhost:9090/api/reparacion
+
+
+#### reparaciones por estimacion
+GET http://localhost:9090/api/reparacion/1
+
+### Agregar reparacion
+POST http://localhost:9090/api/reparacion
+Content-Type: application/json
+
+{
+   "estimacion_id": 1,
+    "detalle_reparacion": "x",
+    "precio": "150.00"
+}
+
+#### Actualizar reparacion
+PUT http://localhost:9090/api/reparacion/15
+Content-Type: application/json
+
+{    
+    "estimacion_id": 1,
+    "detalle_reparacion": "xy",
+    "precio": "150.00"
+}
+
+
+#### Borrar reparacion
+DELETE http://localhost:9090/api/reparacion/1

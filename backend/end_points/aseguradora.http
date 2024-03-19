@@ -1,0 +1,24 @@
+#### Aseguradora
+GET http://localhost:9090/api/aseguradora
+
+
+###
+POST http://localhost:9090/api/aseguradora
+Content-Type: application/json
+
+{
+    "nombre":"patito"
+}
+
+####
+PUT http://localhost:9090/api/aseguradora/4
+Content-Type: application/json
+
+{
+    "nombre":"PATITO",
+    "logotipo":
+}
+
+
+####
+DELETE http://localhost:9090/api/aseguradora/1

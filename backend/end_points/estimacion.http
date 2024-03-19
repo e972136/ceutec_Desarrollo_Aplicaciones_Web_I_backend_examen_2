@@ -1,0 +1,46 @@
+#### Todas las estimaciones
+GET http://localhost:9090/api/estimacion
+
+
+#### Estimacion por id con su detalle
+GET http://localhost:9090/api/estimacion/4
+
+### Agregar estimacion
+POST http://localhost:9090/api/estimacion
+Content-Type: application/json
+
+{
+    "asegurado": "x",
+    "estimado_por": "x",
+    "fecha_evaluacion": "2024-01-01",
+    "aseguradora_id": 1,
+    "placa": "x",
+    "marca": "Toyota",
+    "modelo": "Corolla",
+    "color": "Blanco",
+    "anio_vehiculo": "2015",
+    "vin_o_serie": "5YFBURHEXFP255965",
+    "obs": "x"    
+}
+
+#### Actualizar estimacion
+PUT http://localhost:9090/api/estimacion/4
+Content-Type: application/json
+
+{    
+    "asegurado": "Coorporacion Dinant",
+    "estimado_por": "Mercy Velasquez",
+    "fecha_evaluacion": "2024-01-01",
+    "aseguradora_id": 2,
+    "placa": "HDQ3862-",
+    "marca": "Toyota",
+    "modelo": "Corolla",
+    "color": "Blanco",
+    "anio_vehiculo": "2015",
+    "vin_o_serie": "5YFBURHEXFP255965",
+    "obs": "x"
+}
+
+
+#### Borrar estimacion
+DELETE http://localhost:9090/api/estimacion/1

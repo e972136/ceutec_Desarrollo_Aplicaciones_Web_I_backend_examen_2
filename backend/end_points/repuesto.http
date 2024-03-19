@@ -1,0 +1,30 @@
+#### Todas las reparaciones
+GET http://localhost:9090/api/repuesto
+
+
+#### reparaciones por estimacion
+GET http://localhost:9090/api/repuesto/1
+
+### Agregar reparacion
+POST http://localhost:9090/api/repuesto
+Content-Type: application/json
+
+{
+    "estimacion_id": 3,
+    "descripcion": "Moldura de guardafango cromada LH",
+    "precio": "0.00"
+}
+
+#### Actualizar reparacion
+PUT http://localhost:9090/api/repuesto/15
+Content-Type: application/json
+
+{    
+     "estimacion_id": 3,
+    "descripcion": "Moldura de guardafango cromada LH",
+    "precio": "0.00"
+}
+
+
+#### Borrar reparacion
+DELETE http://localhost:9090/api/repuesto/1
