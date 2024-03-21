@@ -9,8 +9,8 @@ export const UsuariosLogin = () => {
   const navigate = useNavigate();
 
   const [dataForm, setDataForm] = useState({
-    correo: "",
-    contrasena: "",
+    nombre: "",
+    clave: "",
   });
 
   const onChangeHandler = (event) => {
@@ -23,8 +23,8 @@ export const UsuariosLogin = () => {
 
   const submitHandler = async () => {
     event.preventDefault();
-
-    const url = `http://localhost:9090/api/usuario/auth/${dataForm.correo}/${dataForm.contrasena}`;
+    
+    const url = `http://localhost:9090/api/usuario/auth/${dataForm.nombre}/${dataForm.clave}`;
 
     try {
       const result = await axios.get(url);
@@ -46,11 +46,11 @@ export const UsuariosLogin = () => {
         <form onSubmit={submitHandler}>
           <fieldset>
             <div className="form-group">
-              <label>Correo</label>
+              <label>Usuario</label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
-                name="correo"
+                name="nombre"
                 onChange={onChangeHandler}
               />
             </div>
@@ -59,7 +59,7 @@ export const UsuariosLogin = () => {
               <input
                 type="password"
                 className="form-control"
-                name="contrasena"
+                name="clave"
                 onChange={onChangeHandler}
               />
             </div>

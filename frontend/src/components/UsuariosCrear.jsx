@@ -1,5 +1,5 @@
 //rafc para crear nuevo
-import { useState } from "react";
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,32 +9,46 @@ export const UsuariosCrear = () => {
   const navigate = useNavigate();
 
   const [dataForm, setDataForm] = useState({
-    correo: "",
-    contrasena: "",
+    nombre: "",
+    clave: "",
+    foto_perfil: ""
   });
 
-  const onChangeHandler = (event) => {
+  const onChangeHandler = () => {
     const { name, value } = event.target;
-    setDataForm({ ...dataForm, [name]: value });
+    
+    if (name === "foto_perfil") {
+
+      const img = event.target.files[0];
+      setDataForm({ ...dataForm, [name]: img });
+      return;
+      
+   }
+   setDataForm({ ...dataForm, [name]: value });
     console.log(dataForm);
   };
 
-  const [inicioSesion, setInicioSesion] = useState("");
+  const [crearUsuario, setCrearUsuario] = useState("");
 
   const submitHandler = async () => {
+    const url = "http://localhost:4000/api/publicacion";    
     event.preventDefault();
 
-    const url = `http://localhost:9090/api/usuario/auth/${dataForm.correo}/${dataForm.contrasena}`;
+    const datosFormulario = new FormData();
+    
+    datosFormulario.append( "nombre" , dataForm.nombre_usuario);
+    datosFormulario.append( "clave" , dataForm.caption);
+    datosFormulario.append( "foto_perfil" , dataForm.imagen);
 
-    try {
-      const result = await axios.get(url);
+    try{
+      const result  = await axios.post(url, datosFormulario);
       const resultData = (await result).data;
-      const resultEstimacion = resultData[0];
+      const resultEstimacion = resultData[0];  
       const id = resultEstimacion.id;
-      console.log(id);
-      navigate(`/historial/${id}`);
-    } catch (err) {
-      setInicioSesion("Error de Inicio de Sesion");
+      console.log(id);      
+      navigate('/')
+    }catch (err) {
+      setCrearUsuario("Error Al Crear");
     }
   };
 
@@ -79,7 +93,7 @@ export const UsuariosCrear = () => {
             </button>
           </fieldset>
         </form>
-        <div> {inicioSesion} </div>
+        <div> {crearUsuario} </div>
       </div>
     </>
   );

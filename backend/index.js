@@ -1,5 +1,6 @@
 import express from 'express';
 import { aseguradora } from './routes/apiAseguradora.js';
+import { usuario } from './routes/apiUsuario.js';
 
 import cors from 'cors';
 
@@ -21,6 +22,7 @@ app.use(cors(corsOptions));
 
 //Rutas
 app.use("/api/aseguradora",aseguradora);
+app.use("/api/usuario",usuario);
 
 
 app.listen(port,()=>{
