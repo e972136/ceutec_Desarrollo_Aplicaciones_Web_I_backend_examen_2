@@ -3,7 +3,8 @@ GET http://localhost:9090/api/estimacion
 
 
 #### Estimacion por id con su detalle
-GET http://localhost:9090/api/estimacion/4
+GET http://localhost:9090/api/estimacion/1
+
 
 ### Agregar estimacion
 POST http://localhost:9090/api/estimacion

@@ -1,4 +1,4 @@
--- Active: 1705979042290@@localhost@5432@estimaciones
+-- Active: 1707761841846@@127.0.0.1@5432@estimaciones
 
 CREATE TABLE aseguradora(
     id SERIAL NOT NULL PRIMARY KEY,

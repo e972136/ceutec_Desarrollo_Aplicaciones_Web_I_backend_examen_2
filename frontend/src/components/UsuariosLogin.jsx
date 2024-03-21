@@ -25,6 +25,7 @@ export const UsuariosLogin = () => {
     event.preventDefault();
     
     const url = `http://localhost:9090/api/usuario/auth/${dataForm.nombre}/${dataForm.clave}`;
+                 
 
     try {
       const result = await axios.get(url);
@@ -32,7 +33,8 @@ export const UsuariosLogin = () => {
       const resultEstimacion = resultData[0];
       const id = resultEstimacion.id;
       console.log(id);
-      navigate(`/historial/${id}`);
+      navigate(`/estimaciones`);
+      //setInicioSesion(`Inicio de Sesion con ${id}`);
     } catch (err) {
       setInicioSesion("Error de Inicio de Sesion");
     }
