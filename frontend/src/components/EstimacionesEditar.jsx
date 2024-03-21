@@ -1,16 +1,47 @@
 //rafc para crear nuevo
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const EstimacionesEditar = () => {
-
   const navigate = useNavigate();
-  
-  const regresarHandler = ()=>{
-    navigate('/estimaciones/crear');
-  }
 
+  const regresarHandler = () => {
+    navigate("/estimaciones");
+  };
+
+  const { id } = useParams();
+
+  const [dataForm, setDataForm] = useState({
+    
+      id: "1",
+      asegurado: "Franco Lopez",
+      estimado_por: "Meylin  Amador",
+      fecha_evaluacion: "2024-01-01T06:00:00.000Z",
+      aseguradora_id: 1,
+      placa: "HAK5195",
+      marca: "Suzuki",
+      modelo: "Dzire",
+      color: "Rojo",
+      anio_vehiculo: "2018",
+      vin_o_serie: "MA3ZF63SXJA185480",
+      obs: "x",
+      km:"",
+      implementado_por:"",
+      total_Reparaciones:0.0
+});
+
+  const getDatos = async () => {
+    const url = `http://localhost:9090/api/estimacion/${id}`;
+    const response = await axios.get(url);
+    const datos = (await response).data;
+    console.log(datos);
+    setDataForm(datos);
+  };
+
+  useEffect(() => {
+    getDatos();
+  },[]);
 
   return (
     <>
@@ -18,7 +49,11 @@ export const EstimacionesEditar = () => {
         <a href="/estimaciones" className="btn btn-primary">
           Regresar href
         </a>
-        <button onClick={regresarHandler}  className="btn btn-success" type="button" >
+        <button
+          onClick={regresarHandler}
+          className="btn btn-success"
+          type="button"
+        >
           Regresar handler
         </button>
 
@@ -31,68 +66,74 @@ export const EstimacionesEditar = () => {
               <div className="card-body">
                 <form method="POST" className="row">
                   <div className="col-3">
-                    <label for="estimacion">
+                    <label htmlFor="estimacion">
                       <b>Estimacion</b>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="estimacion"
-                      readonly
+                      value={dataForm.id}
+                      readOnly
                     />
                   </div>
 
                   <div className="col-3">
-                    <label for="fechaEvaluacion">
+                    <label htmlFor="fechaEvaluacion">
                       <b>Fecha Evaluacion</b>
                     </label>
                     <input
                       type="date"
                       className="form-control"
                       id="fechaEvaluacion"
+                      value={dataForm.fecha_evaluacion}
                     />
                   </div>
                   <div className="col-6">
-                    <label for="implementadoPor">
+                    <label htmlFor="implementadoPor">
                       <b>Implementado Por</b>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="implementadoPor"
-                      readonly
+                      value={dataForm.implementado_por}
+                      readOnly
                     />
                   </div>
                   <div className="col-6">
-                    <label for="asegurado">
+                    <label htmlFor="asegurado">
                       <b>Asegurado</b>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="asegurado"
-                      autocomplete="on"
+                      autoComplete="on"
+                      value={dataForm.asegurado}
                     />
                   </div>
                   <div className="col-6">
-                    <label for="aseguradora">
+                    <label htmlFor="aseguradora">
                       <b>Aseguradora</b>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="aseguradora"
-                      autocomplete="on"
+                      autoComplete="on"
+                      value={dataForm.aseguradora_id}
                     />
                   </div>
                   <div className="col-6">
-                    <label for="estimadoPor">
+                    <label htmlFor="estimadoPor">
                       <b>Estimado Por</b>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="estimadoPor"
+                      value={dataForm.estimado_por}
                     />
                   </div>
                   <div className="col-12">
@@ -100,72 +141,79 @@ export const EstimacionesEditar = () => {
                   </div>
 
                   <div className="col-3">
-                    <label for="placa">
+                    <label htmlFor="placa">
                       <b>Placa</b>
                     </label>
-                    <input type="text" className="form-control" id="placa" />
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      id="placa" 
+                    value={dataForm.placa}/>
                   </div>
 
                   <div className="col-8"></div>
 
                   <div className="col-3">
-                    <label for="marca">
+                    <label htmlFor="marca">
                       <b>Marca</b>
                     </label>
-                    <input type="text" className="form-control" id="marca" />
+                    <input type="text" className="form-control" id="marca" value={dataForm.marca}/>
                   </div>
 
                   <div className="col-4">
-                    <label for="modelo">
+                    <label htmlFor="modelo">
                       <b>Modelo</b>
                     </label>
-                    <input type="text" className="form-control" id="modelo" />
+                    <input type="text" className="form-control" id="modelo" value={dataForm.modelo}/>
                   </div>
 
                   <div className="col-1">
-                    <label for="anioVehiculo">
+                    <label htmlFor="anioVehiculo">
                       <b>Año</b>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="anioVehiculo"
+                      value={dataForm.anio_vehiculo}
                     />
                   </div>
 
                   <div className="col-2">
-                    <label for="colorVehiculo">
+                    <label htmlFor="colorVehiculo">
                       <b>Color</b>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="colorVehiculo"
+                      value={dataForm.color}
                     />
                   </div>
 
                   <div className="col-2">
-                    <label for="kM">
+                    <label htmlFor="kM">
                       <b>kM</b>
                     </label>
-                    <input type="text" className="form-control" id="kM" />
+                    <input type="text" className="form-control" id="kM" value={dataForm.km}/>
                   </div>
 
                   <div className="col-6">
-                    <label for="vinOSerie">
+                    <label htmlFor="vinOSerie">
                       <b>Vin O Serie</b>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       id="vinOSerie"
+                      value={dataForm.vin_o_serie}
                     />
                   </div>
 
                   <div className="col-6"></div>
 
                   <div className="col-3 mt-1">
-                    <label for="totalRepuestos">
+                    <label htmlFor="totalRepuestos">
                       Total de costos de repuestos:{" "}
                     </label>
                   </div>
@@ -175,6 +223,7 @@ export const EstimacionesEditar = () => {
                       className="form-control"
                       id="totalRepuestos"
                       disabled
+                      
                     />
                   </div>
                   <div className="col-6  mt-1">
@@ -185,13 +234,13 @@ export const EstimacionesEditar = () => {
                       LISTA DE REPUESTOS NECESARIOS A REEMPLAZAR
                       <i
                         className="fa fa-pencil-square-o"
-                        aria-hidden="true"
+                        aria-hidden="true"                        
                       ></i>
                     </a>
                   </div>
 
                   <div className="col-3  mt-1">
-                    <label for="totalReparaciones">
+                    <label htmlFor="totalReparaciones">
                       Total de costos de mano de obra:{" "}
                     </label>
                   </div>
@@ -199,7 +248,8 @@ export const EstimacionesEditar = () => {
                     <input
                       type="text"
                       className="form-control"
-                      id="totalReparaciones"
+                      id="totalReparaciones"      
+                      value={dataForm.total_Reparaciones}                
                       disabled
                     />
                   </div>
@@ -214,7 +264,7 @@ export const EstimacionesEditar = () => {
                   </div>
 
                   <div className="col-3  mt-1">
-                    <label for="totalReparacionesAdicionales">
+                    <label htmlFor="totalReparacionesAdicionales">
                       Total reparaciones adicionales:{" "}
                     </label>
                   </div>
@@ -237,7 +287,7 @@ export const EstimacionesEditar = () => {
                   </div>
 
                   <div className="col-3  mt-1">
-                    <label for="totalCostosAdicionalesMateriales">
+                    <label htmlFor="totalCostosAdicionalesMateriales">
                       Total costos adicionales (materiales):{" "}
                     </label>
                   </div>
@@ -255,7 +305,7 @@ export const EstimacionesEditar = () => {
                   </div>
 
                   <div className="col-3  mt-1">
-                    <label for="totalCostosManoObra">
+                    <label htmlFor="totalCostosManoObra">
                       Total Costos Mano de Obra:{" "}
                     </label>
                   </div>
@@ -269,7 +319,7 @@ export const EstimacionesEditar = () => {
                   </div>
 
                   <div className="col-3 mt-1">
-                    <label for="CostoManoDeObraGerente">
+                    <label htmlFor="CostoManoDeObraGerente">
                       Costo mano de obra gerente:{" "}
                     </label>
                   </div>
@@ -283,7 +333,7 @@ export const EstimacionesEditar = () => {
                   </div>
 
                   <div className="col-3 mt-1">
-                    <label for="totalRepuestosT">Total Repuestos: </label>
+                    <label htmlFor="totalRepuestosT">Total Repuestos: </label>
                   </div>
                   <div className="col-3 mt-1">
                     <input
@@ -297,7 +347,7 @@ export const EstimacionesEditar = () => {
                   <div className="col-6 mt-1"></div>
 
                   <div className="col-3 mt-1">
-                    <label for="totalCostosManoObraT">
+                    <label htmlFor="totalCostosManoObraT">
                       Total Costos Mano de Obra:{" "}
                     </label>
                   </div>
@@ -311,7 +361,7 @@ export const EstimacionesEditar = () => {
                   </div>
 
                   <div className="col-3  mt-1">
-                    <label for="costoMaterialesGerente">
+                    <label htmlFor="costoMaterialesGerente">
                       Costo MaterialesG:{" "}
                     </label>
                   </div>

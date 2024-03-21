@@ -41,9 +41,18 @@ const getEstimacionById = async (req, res) => {
     const anio_vehiculo= resultEstimacion.anio_vehiculo;
     const vin_o_serie= resultEstimacion.vin_o_serie;
     const obs= resultEstimacion.obs;
+    const km=100;
+    const implementado_por = resultEstimacion.estimado_por;
+
 
     const sqlReparacion = `select * from reparacion where reparacion.estimacion_id = ${id}`;
     const reparacion = await db.query(sqlReparacion);
+
+    const sqlTotalReparaciones = `select sum(precio) as t from reparacion where reparacion.estimacion_id = ${id}`;
+    const totalReparacionesResponse = await db.query(sqlTotalReparaciones);
+    const totalReparacionesResult = totalReparacionesResponse[0];
+    const total_Reparaciones = totalReparacionesResult.t;
+
 
     const sqlReparacion_adicional = `select * from reparacion_adicional where reparacion_adicional.estimacion_id = ${id}`;
     const reparacion_adicional = await db.query(sqlReparacion_adicional);
@@ -65,8 +74,11 @@ const getEstimacionById = async (req, res) => {
         vin_o_serie,
         obs,
         reparacion,
+        total_Reparaciones,
         reparacion_adicional,
-        repuesto
+        repuesto,
+        km,
+        implementado_por
     };
 
 

@@ -57,7 +57,8 @@ export const EstimacionesListado = () => {
       </a>
 
       <button onClick={crearEstimacionHandler}  className="btn btn-success" type="button" >
-        Agregar Estimacion handler
+        Agregar Estimacion handler 
+        <i className="fa fa-plus-square" aria-hidden="true"></i>
         </button>
 
       <table className="table table-dark table-striped">
