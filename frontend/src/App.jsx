@@ -9,6 +9,7 @@ import { EstimacionesListado } from './components/EstimacionesListado'
 import { EstimacionesEditar } from './components/EstimacionesEditar'
 import { EstimacionesCrear } from './components/EstimacionesCrear'
 import { Reparaciones } from './components/Reparaciones'
+import { ReparacionesAgregar } from './components/ReparacionesAgregar'
 import { ReparacionAdicional } from './components/ReparacionAdicional'
 import { Repuestos } from './components/Repuestos'
 
@@ -30,6 +31,7 @@ function App() {
             <Route path='/estimaciones/editar/:id' element={<EstimacionesEditar/>}>  </Route>
             <Route path='/estimaciones/crear' element={<EstimacionesCrear/>}>  </Route>
             <Route path='/reparaciones/:id' element={<Reparaciones/>}>  </Route>
+            <Route path='/reparaciones/agregar/:id' element={<ReparacionesAgregar/>}>  </Route>            
             <Route path='/reparacion_adicional/:id' element={<ReparacionAdicional/>}>  </Route>
             <Route path='/repuestos/:id' element={<Repuestos/>}>  </Route>
         </Routes>

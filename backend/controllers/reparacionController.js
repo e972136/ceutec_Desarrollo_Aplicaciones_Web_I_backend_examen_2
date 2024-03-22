@@ -23,7 +23,10 @@ const getReparacionesPorEstimacion= async (req, res)=>{
 const postReparacion = async (req, res)=>{
 
     const {estimacion_id,detalle_reparacion,precio}=req.body;
-    
+    console.log(estimacion_id);
+    console.log(detalle_reparacion);
+    console.log(precio);
+
 
     const params =[
         estimacion_id,detalle_reparacion,precio

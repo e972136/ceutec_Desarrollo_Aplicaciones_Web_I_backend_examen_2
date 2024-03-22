@@ -7,17 +7,19 @@ const postEstimacion = async (req, res)=>{
 
     const params =[
         asegurado,estimado_por,fecha_evaluacion,aseguradora_id,placa,marca,modelo,color,anio_vehiculo,vin_o_serie,obs
-    ];
-
+    ]; 
 
     const sql = `INSERT INTO estimacion(asegurado,estimado_por,fecha_evaluacion,aseguradora_id,placa,marca,modelo,color,anio_vehiculo,vin_o_serie,obs)
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) returning *`;
 
     console.log(sql);
-
-    const result = await db.query(sql,params);
-
-    res.json(result);
+    try{
+        const result = await db.query(sql,params);
+        res.json(result);
+    }catch(err){
+        res.status(500).json({mensaje: err.message})
+    }
+    
 
 };
 

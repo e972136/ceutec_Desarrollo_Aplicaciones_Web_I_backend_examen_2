@@ -13,23 +13,22 @@ export const EstimacionesEditar = () => {
   const { id } = useParams();
 
   const [dataForm, setDataForm] = useState({
-    
-      id: "1",
-      asegurado: "Franco Lopez",
-      estimado_por: "Meylin  Amador",
-      fecha_evaluacion: "2024-01-01T06:00:00.000Z",
-      aseguradora_id: 1,
-      placa: "HAK5195",
-      marca: "Suzuki",
-      modelo: "Dzire",
-      color: "Rojo",
-      anio_vehiculo: "2018",
-      vin_o_serie: "MA3ZF63SXJA185480",
-      obs: "x",
-      km:"",
-      implementado_por:"",
-      total_Reparaciones:0.0
-});
+    id: "1",
+    asegurado: "Franco Lopez",
+    estimado_por: "Meylin  Amador",
+    fecha_evaluacion: "2024-01-01T06:00:00.000Z",
+    aseguradora_id: 1,
+    placa: "HAK5195",
+    marca: "Suzuki",
+    modelo: "Dzire",
+    color: "Rojo",
+    anio_vehiculo: "2018",
+    vin_o_serie: "MA3ZF63SXJA185480",
+    obs: "x",
+    km: "",
+    implementado_por: "",
+    total_Reparaciones: 0.0,
+  });
 
   const getDatos = async () => {
     const url = `http://localhost:9090/api/estimacion/${id}`;
@@ -41,7 +40,7 @@ export const EstimacionesEditar = () => {
 
   useEffect(() => {
     getDatos();
-  },[]);
+  }, []);
 
   return (
     <>
@@ -144,11 +143,12 @@ export const EstimacionesEditar = () => {
                     <label htmlFor="placa">
                       <b>Placa</b>
                     </label>
-                    <input 
-                      type="text" 
-                      className="form-control" 
-                      id="placa" 
-                    value={dataForm.placa}/>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="placa"
+                      value={dataForm.placa}
+                    />
                   </div>
 
                   <div className="col-8"></div>
@@ -157,14 +157,24 @@ export const EstimacionesEditar = () => {
                     <label htmlFor="marca">
                       <b>Marca</b>
                     </label>
-                    <input type="text" className="form-control" id="marca" value={dataForm.marca}/>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="marca"
+                      value={dataForm.marca}
+                    />
                   </div>
 
                   <div className="col-4">
                     <label htmlFor="modelo">
                       <b>Modelo</b>
                     </label>
-                    <input type="text" className="form-control" id="modelo" value={dataForm.modelo}/>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="modelo"
+                      value={dataForm.modelo}
+                    />
                   </div>
 
                   <div className="col-1">
@@ -195,7 +205,12 @@ export const EstimacionesEditar = () => {
                     <label htmlFor="kM">
                       <b>kM</b>
                     </label>
-                    <input type="text" className="form-control" id="kM" value={dataForm.km}/>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="kM"
+                      value={dataForm.km}
+                    />
                   </div>
 
                   <div className="col-6">
@@ -223,18 +238,17 @@ export const EstimacionesEditar = () => {
                       className="form-control"
                       id="totalRepuestos"
                       disabled
-                      
                     />
                   </div>
                   <div className="col-6  mt-1">
-                    <a                      
-                      href={"/repuestos/"+dataForm.id}
+                    <a
+                      href={"/repuestos/" + dataForm.id}
                       className="btn btn-warning form-control"
                     >
                       LISTA DE REPUESTOS NECESARIOS A REEMPLAZAR
                       <i
                         className="fa fa-pencil-square-o"
-                        aria-hidden="true"                        
+                        aria-hidden="true"
                       ></i>
                     </a>
                   </div>
@@ -248,15 +262,16 @@ export const EstimacionesEditar = () => {
                     <input
                       type="text"
                       className="form-control"
-                      id="totalReparaciones"      
-                      value={dataForm.total_Reparaciones}                
+                      id="totalReparaciones"
+                      value={dataForm.total_Reparaciones}
                       disabled
                     />
                   </div>
                   <div className="col-6  mt-1">
-                    <a                     
-                    href={"/reparaciones/"+dataForm.id}
-                    className="btn btn-warning form-control">
+                    <a
+                      href={"/reparaciones/" + dataForm.id}
+                      className="btn btn-warning form-control"
+                    >
                       LISTA DE REPARACIONES
                       <i
                         className="fa fa-pencil-square-o"
@@ -279,103 +294,16 @@ export const EstimacionesEditar = () => {
                     />
                   </div>
                   <div className="col-6  mt-1 ">
-                    <a 
-                      href={"/reparacion_adicional/"+dataForm.id}
-                    className="btn btn-warning form-control">
+                    <a
+                      href={"/reparacion_adicional/" + dataForm.id}
+                      className="btn btn-warning form-control"
+                    >
                       LISTA DE REPARACIONES ADICIONALES
                       <i
                         className="fa fa-pencil-square-o"
                         aria-hidden="true"
                       ></i>
                     </a>
-                  </div>
-
-                  <div className="col-3  mt-1">
-                    <label htmlFor="totalCostosAdicionalesMateriales">
-                      Total costos adicionales (materiales):{" "}
-                    </label>
-                  </div>
-                  <div className="col-3 mt-1">
-                    <input
-                      type="number"
-                      step="0.01"
-                      className="form-control"
-                      id="totalCostosAdicionalesMateriales"
-                    />
-                  </div>
-
-                  <div className="col-12">
-                    <h2>TOTALES</h2>
-                  </div>
-
-                  <div className="col-3  mt-1">
-                    <label htmlFor="totalCostosManoObra">
-                      Total Costos Mano de Obra:{" "}
-                    </label>
-                  </div>
-                  <div className="col-3 mt-1">
-                    <input
-                      type="number"
-                      step="0.01"
-                      className="form-control"
-                      id="totalCostosManoObra"
-                    />
-                  </div>
-
-                  <div className="col-3 mt-1">
-                    <label htmlFor="CostoManoDeObraGerente">
-                      Costo mano de obra gerente:{" "}
-                    </label>
-                  </div>
-                  <div className="col-3 mt-1">
-                    <input
-                      type="number"
-                      step="0.01"
-                      className="form-control"
-                      id="CostoManoDeObraGerente"
-                    />
-                  </div>
-
-                  <div className="col-3 mt-1">
-                    <label htmlFor="totalRepuestosT">Total Repuestos: </label>
-                  </div>
-                  <div className="col-3 mt-1">
-                    <input
-                      type="number"
-                      step="0.01"
-                      className="form-control"
-                      id="totalRepuestosT"
-                    />
-                  </div>
-
-                  <div className="col-6 mt-1"></div>
-
-                  <div className="col-3 mt-1">
-                    <label htmlFor="totalCostosManoObraT">
-                      Total Costos Mano de Obra:{" "}
-                    </label>
-                  </div>
-                  <div className="col-3 mt-1">
-                    <input
-                      type="number"
-                      step="0.01"
-                      className="form-control"
-                      id="totalCostosManoObraT"
-                    />
-                  </div>
-
-                  <div className="col-3  mt-1">
-                    <label htmlFor="costoMaterialesGerente">
-                      Costo MaterialesG:{" "}
-                    </label>
-                  </div>
-                  <div className="col-3 mt-1">
-                    <input
-                      type="number"
-                      step="0.01"
-                      className="form-control"
-                      id="costoMaterialesGerente"
-                    />
                   </div>
 
                   <div className="col-12 mt-3">
