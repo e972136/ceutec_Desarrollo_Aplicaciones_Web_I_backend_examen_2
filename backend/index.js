@@ -2,6 +2,9 @@ import express from 'express';
 import { aseguradora } from './routes/apiAseguradora.js';
 import { usuario } from './routes/apiUsuario.js';
 import { estimacion } from './routes/apiEstimacion.js';
+import { reparacion } from './routes/apiReparacion.js';
+import { reparacionAdicional } from './routes/apiReparacionAdicional.js';
+import { repuesto } from './routes/apiRepuesto.js';
 
 import cors from 'cors';
 
@@ -25,6 +28,9 @@ app.use(cors(corsOptions));
 app.use("/api/aseguradora",aseguradora);
 app.use("/api/usuario",usuario);
 app.use("/api/estimacion",estimacion);
+app.use("/api/reparacion",reparacion);
+app.use("/api/reparacion-adicional",reparacionAdicional);
+app.use("/api/repuesto",repuesto); 
 
 
 app.listen(port,()=>{

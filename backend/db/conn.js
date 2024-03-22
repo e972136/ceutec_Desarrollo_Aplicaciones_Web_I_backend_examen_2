@@ -11,7 +11,9 @@ const database = process.env.DB_BASE;
 
 const cnstr = `postgresql://${user}:${pass}@${host}:5432/${database}`;
 
+
 const db = pgp(cnstr);
+
 
 db.connect()
     .then(()=>{

@@ -227,8 +227,8 @@ export const EstimacionesEditar = () => {
                     />
                   </div>
                   <div className="col-6  mt-1">
-                    <a
-                      href="/admin-repuestos"
+                    <a                      
+                      href={"/repuestos/"+dataForm.id}
                       className="btn btn-warning form-control"
                     >
                       LISTA DE REPUESTOS NECESARIOS A REEMPLAZAR
@@ -254,7 +254,9 @@ export const EstimacionesEditar = () => {
                     />
                   </div>
                   <div className="col-6  mt-1">
-                    <a className="btn btn-warning form-control">
+                    <a                     
+                    href={"/reparaciones/"+dataForm.id}
+                    className="btn btn-warning form-control">
                       LISTA DE REPARACIONES
                       <i
                         className="fa fa-pencil-square-o"
@@ -277,7 +279,9 @@ export const EstimacionesEditar = () => {
                     />
                   </div>
                   <div className="col-6  mt-1 ">
-                    <a className="btn btn-warning form-control">
+                    <a 
+                      href={"/reparacion_adicional/"+dataForm.id}
+                    className="btn btn-warning form-control">
                       LISTA DE REPARACIONES ADICIONALES
                       <i
                         className="fa fa-pencil-square-o"
