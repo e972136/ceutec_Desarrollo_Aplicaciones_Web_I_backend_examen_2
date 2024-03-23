@@ -117,6 +117,9 @@ const getEstimacion = async (req, res)=>{
 };
 
 const putEstimacion = async (req, res)=>{
+    console.log("viene");
+    console.log(req.body);
+
     const {asegurado,estimado_por,fecha_evaluacion,aseguradora_id,placa,marca,modelo,color,anio_vehiculo,vin_o_serie,obs}=req.body;
     const {id} = req.params;
 
@@ -142,10 +145,15 @@ const putEstimacion = async (req, res)=>{
 
     console.log(sql);
 
-    const result = await db.query(sql,params);
+    try{
+        const result = await db.query(sql,params);
+        res.json(result);
+    }catch(err){
+        res.status(500).json({mensaje: err.message})
+    }
 
-    res.json(result);
 
+    
 };
 
 const delEstimacion = async (req, res)=>{

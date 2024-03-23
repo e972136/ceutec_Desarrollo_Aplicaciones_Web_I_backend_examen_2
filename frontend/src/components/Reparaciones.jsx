@@ -2,9 +2,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { ReparacionesAgregar } from './ReparacionesAgregar'
 
 export const Reparaciones = () => {
   const navigate = useNavigate();
+
+  const [contadorDeBorrar, setContadorDeBorrar] = useState(0);
 
   const [dataMuro, setDataMuro] = useState([]);
 
@@ -18,17 +21,32 @@ export const Reparaciones = () => {
     setDataMuro(datos);
   };
 
-  const agregarReparacionHandler = () => {        
+  const agregarReparacionHandler = () => {
     navigate(`/reparaciones/agregar/${id}`);
   };
 
+
+  const borraPublicacion = async (idPost) => {
+
+    const url = `http://localhost:9090/api/reparacion/${idPost}`;
+    const response = await axios.delete(url);
+    const datos = (await response).data;
+
+    setContadorDeBorrar(contadorDeBorrar + 1);
+    console.log(contadorDeBorrar);
+
+  }
+
+
+
   useEffect(() => {
     getDatos();
-  }, []);
+  }, [contadorDeBorrar]);
 
   return (
     <>
-      <div className="container">
+
+      <div className="container-fluid">
         <a href={"/estimaciones/editar/" + id} className="btn btn-primary">
           Regresar
         </a>
@@ -39,7 +57,7 @@ export const Reparaciones = () => {
                 <h3 className="text-center">Reparaciones</h3>
               </div>
 
-              <div className="card-body">
+              <div className="row">
                 <div className="col-1">
                   <label htmlFor="estimacion">
                     <b>Estimacion</b>
@@ -57,19 +75,13 @@ export const Reparaciones = () => {
                 </div>
 
                 <div className="col-9"></div>
+              </div>
 
-                <div className="col-6 mt-1">
+              <div className="row">
+                <ReparacionesAgregar />
+              </div>
 
-                  <button
-                       onClick={agregarReparacionHandler}
-                       type="button"       
-                    className="btn btn-success form-control"
-                  >
-                    Agregar <i className="fa fa-plus-square " aria-hidden="true"></i>
-                  </button>
-                </div>
-
-                <div className="col-6"></div>
+              <div className="card-body">
 
                 <div className="col-12">
                   <fieldset>
@@ -77,8 +89,9 @@ export const Reparaciones = () => {
                       <thead>
                         <tr>
                           <th className="col-2">id</th>
-                          <th className="col-8">Descripcion</th>
+                          <th className="col-7">Descripcion</th>
                           <th className="col-2">Precio</th>
+                          <th className="col-1">Accion</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -86,9 +99,13 @@ export const Reparaciones = () => {
                           <tr>
                             <td className="col-2">{item.id}</td>
                             <td className="col-8">
-                              {item.detalle_reparacion}{" "}
+                              {item.detalle_reparacion}
                             </td>
                             <td className="col-2">{item.precio} </td>
+                            <td className="col-1">
+                              <button onClick={() => borraPublicacion(item.id)} className="btn btn-danger mx-2" >Borrar</button>
+
+                            </td>
                           </tr>
                         ))}
                       </tbody>

@@ -14,17 +14,17 @@ export const EstimacionesEditar = () => {
 
   const [dataForm, setDataForm] = useState({
     id: "1",
-    asegurado: "Franco Lopez",
-    estimado_por: "Meylin  Amador",
-    fecha_evaluacion: "2024-01-01T06:00:00.000Z",
+    asegurado: "",
+    estimado_por: "",
+    fecha_evaluacion: "",
     aseguradora_id: 1,
-    placa: "HAK5195",
-    marca: "Suzuki",
-    modelo: "Dzire",
-    color: "Rojo",
-    anio_vehiculo: "2018",
-    vin_o_serie: "MA3ZF63SXJA185480",
-    obs: "x",
+    placa: "",
+    marca: "",
+    modelo: "",
+    color: "",
+    anio_vehiculo: "",
+    vin_o_serie: "",
+    obs: "",
     km: "",
     implementado_por: "",
     total_Reparaciones: 0.0,
@@ -47,6 +47,56 @@ export const EstimacionesEditar = () => {
     console.log(datos);
     setDataForm(datos);
   };
+
+  const [guardarEstimacion, setGuardarEstimacion] = useState("");
+
+  const submitHandler = async () => {
+    const url = `http://localhost:9090/api/estimacion/${id}`;
+    event.preventDefault();
+    
+    
+    const datosFormulario =
+    {    
+      asegurado: dataForm.asegurado,
+      estimado_por: dataForm.estimado_por,
+      fecha_evaluacion: dataForm.fecha_evaluacion,
+      aseguradora_id: dataForm.aseguradora_id,
+      placa: dataForm.placa,
+      marca: dataForm.marca,
+      modelo: dataForm.modelo,
+      color: dataForm.color,
+      anio_vehiculo: dataForm.anio_vehiculo,
+      vin_o_serie: dataForm.vin_o_serie,
+      obs: dataForm.obs
+  };
+
+   /*
+   const datosFormulario = new FormData();
+   datosFormulario.append("asegurado","y");
+    datosFormulario.append("estimado_por", "y");
+    datosFormulario.append("fecha_evaluacion", "2024-01-01");
+    datosFormulario.append("aseguradora_id", 1);
+    datosFormulario.append("placa", "y");
+    datosFormulario.append("marca", "y");
+    datosFormulario.append("modelo", "y");
+    datosFormulario.append("color", "y");
+    datosFormulario.append("anio_vehiculo", "y");
+    datosFormulario.append("vin_o_serie", "y");
+    datosFormulario.append("obs", "x");*/
+
+    console.log(datosFormulario);
+    try{
+      const result  = await axios.put(url, datosFormulario);
+      const resultData = (await result).data;
+      const resultEstimacion = resultData[0];  
+      const id = resultEstimacion.id;
+      console.log(id);      
+      navigate(`/estimaciones`);
+    }catch (err) {
+      setGuardarEstimacion("Error Al guardar!");
+    }
+
+  }
 
   useEffect(() => {
     getDatos();
@@ -73,7 +123,8 @@ export const EstimacionesEditar = () => {
                 <h3>EDITAR ESTIMACION</h3>
               </div>
               <div className="card-body">
-                <form method="POST" className="row">
+                <form onSubmit={submitHandler} className="row">
+
                   <div className="col-3">
                     <label htmlFor="estimacion">
                       <b>Estimacion</b>
@@ -345,10 +396,12 @@ export const EstimacionesEditar = () => {
                       type="submit"
                       className="btn btn-primary form-control btn-lg"
                     >
-                      SAVE
+                      Guardar Estimacion
                     </button>
                   </div>
+                
                 </form>
+                <div> {guardarEstimacion} </div>
               </div>
             </div>
           </div>

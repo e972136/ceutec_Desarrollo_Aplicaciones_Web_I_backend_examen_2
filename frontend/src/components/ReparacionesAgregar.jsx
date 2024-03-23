@@ -23,17 +23,17 @@ export const ReparacionesAgregar = () => {
 
     event.preventDefault();
 
-/*    const datosFormulario = new FormData();
+    /*    const datosFormulario = new FormData();
+    
+        datosFormulario.append("estimacion_id", id);
+        datosFormulario.append("detalle_reparacion", form.detalle_reparacion);
+        datosFormulario.append("precio", form.precio);*/
 
-    datosFormulario.append("estimacion_id", id);
-    datosFormulario.append("detalle_reparacion", form.detalle_reparacion);
-    datosFormulario.append("precio", form.precio);*/
 
-
-    const data = {            
-        estimacion_id: id,
-        detalle_reparacion: form.detalle_reparacion,
-        precio: form.precio        
+    const data = {
+      estimacion_id: id,
+      detalle_reparacion: form.detalle_reparacion,
+      precio: form.precio
     }
 
 
@@ -42,7 +42,8 @@ export const ReparacionesAgregar = () => {
     const result = await axios.post(url, data);
     const resultData = (await result).data;
     console.log(resultData);
-    navigate(`/reparaciones/${id}`);
+    //navigate(`/reparaciones/${id}`);
+    window.location.reload(false);
   };
 
   return (
@@ -51,33 +52,35 @@ export const ReparacionesAgregar = () => {
         <form onSubmit={submitHandler}>
           <fieldset>
             <legend>Reparacion</legend>
+            <div className="row">
+              <div className="col-6">
+                <label className="form-label">Detalle Reparacion</label>
 
-            <div className="form-group">
-              <label className="form-label">Detalle Reparacion</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="detalle_reparacion"
+                  onChange={onChangeHandler}
+                />
+              </div>
 
-              <input
-                className="form-control"
-                type="text"
-                name="detalle_reparacion"
-                onChange={onChangeHandler}
-              />
+              <div className="col-3">
+                <label className="form-label">Precio</label>
+
+                <input
+                  className="form-control"
+                  type="number"
+                  step="0.01"
+                  name="precio"
+                  onChange={onChangeHandler}
+                />
+              </div>
+
+              <button type="submit" className="btn btn-primary col-3">
+                Agregar Reparacion
+              </button>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Precio</label>
-
-              <input
-                className="form-control"
-                type="number"
-                step="0.01"
-                name="precio"
-                onChange={onChangeHandler}
-              />
-            </div>
-
-            <button type="submit" className="btn btn-primary w-100">
-              Agregar Reparacion
-            </button>
           </fieldset>
         </form>
       </div>
