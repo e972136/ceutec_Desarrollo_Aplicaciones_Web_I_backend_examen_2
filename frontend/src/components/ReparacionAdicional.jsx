@@ -38,6 +38,11 @@ export const ReparacionAdicional = () => {
 
   }
 
+  const editarPublicacion = (idPublcacion) => {
+
+    navigate(`/reparacion_adicional/editar/${id}/${idPublcacion}`);
+
+  }
 
 
   useEffect(() => {
@@ -99,15 +104,15 @@ export const ReparacionAdicional = () => {
                       <tbody>
                         {dataMuro.map((item) => (
                           <tr>
-                            <td className="col-2">{item.id}</td>
+                            <td className="col-1">{item.id}</td>
                             <td className="col-6">
                               {item.reparacion_adicional_detalle}
                             </td>
                             <td className="col-2">{item.valor_reparacion} </td>
                             <td className="col-1">{item.tipo} </td>                            
-                            <td className="col-1">
+                            <td className="col-2">
                               <button onClick={() => borraPublicacion(item.id)} className="btn btn-danger mx-2" >Borrar</button>
-
+                              <button onClick={() => editarPublicacion(item.id)} className="btn btn-warning" >Editar</button>
                             </td>
                           </tr>
                         ))}

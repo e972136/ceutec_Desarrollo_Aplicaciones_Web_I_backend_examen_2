@@ -17,7 +17,7 @@ export const EstimacionesEditar = () => {
     asegurado: "",
     estimado_por: "",
     fecha_evaluacion: "",
-    aseguradora_id: 1,
+    aseguradora_id: "2",
     placa: "",
     marca: "",
     modelo: "",
@@ -31,6 +31,8 @@ export const EstimacionesEditar = () => {
     total_repuestos: 0.0,
     total_reparacion_adicional: 0.0,
   });
+
+  const [aseguradoras, setAseguradoras] = useState([]);
 
   const handlerChange = (event)=>{
 
@@ -47,6 +49,15 @@ export const EstimacionesEditar = () => {
     console.log(datos);
     setDataForm(datos);
   };
+
+  const getAseguradoras = async () =>{
+    
+    const url = `http://localhost:9090/api/aseguradora`;
+    const response = await axios.get(url);
+    const datos = (await response).data;
+    console.log(datos);
+    setAseguradoras(datos);
+  }
 
   const [guardarEstimacion, setGuardarEstimacion] = useState("");
 
@@ -98,8 +109,12 @@ export const EstimacionesEditar = () => {
 
   }
 
+
+
+
   useEffect(() => {
     getDatos();
+    getAseguradoras();
   }, []);
 
   return (
@@ -177,11 +192,27 @@ export const EstimacionesEditar = () => {
                       value={dataForm.asegurado}
                     />
                   </div>
+
+
                   <div className="col-6">
                     <label htmlFor="aseguradora">
                       <b>Aseguradora</b>
                     </label>
-                    <input
+                    <select
+                    className="custom-select"
+                    name="aseguradora_id"
+                    id="aseguradora"
+                    value={dataForm.aseguradora_id}
+                    onChange={handlerChange}
+                    >
+                      {
+                        aseguradoras.map((item)=>(
+                          <option key={item.id} value={item.id}>{item.nombre}</option>
+                        ))
+                      }
+                      </select>
+
+{/*                    <input
                       type="text"
                       className="form-control"
                       id="aseguradora"
@@ -190,7 +221,10 @@ export const EstimacionesEditar = () => {
                       name="aseguradora_id"
                       value={dataForm.aseguradora_id}
                     />
+  */}
                   </div>
+
+
                   <div className="col-6">
                     <label htmlFor="estimadoPor">
                       <b>Estimado Por</b>

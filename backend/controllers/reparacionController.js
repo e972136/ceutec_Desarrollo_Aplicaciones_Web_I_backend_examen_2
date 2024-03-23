@@ -14,11 +14,29 @@ const getReparacionesPorEstimacion= async (req, res)=>{
     const {estimacion_id} = req.params;
     
 
-    const sql = `select  * from reparacion where reparacion.estimacion_id = ${estimacion_id}`;
+    const sql = `select  * 
+    from reparacion 
+    where reparacion.estimacion_id = ${estimacion_id}
+    order by reparacion.id`;
+
     const resultReparacion = await db.query(sql);
 
     res.json(resultReparacion);
 };
+
+
+const getReparacionesIndividual = async (req, res) => {
+    const { id } = req.params;
+
+    const sql = `select * from reparacion where id = ${id}`;
+
+    const resultadoRepuesto = await db.query(sql);
+
+
+    res.json(resultadoRepuesto[0]) ;
+
+
+}
 
 const postReparacion = async (req, res)=>{
 
@@ -91,5 +109,6 @@ export {
     getReparacion, 
     getReparacionesPorEstimacion,   
     putReparacion,
+    getReparacionesIndividual,
     delReparacion
 };

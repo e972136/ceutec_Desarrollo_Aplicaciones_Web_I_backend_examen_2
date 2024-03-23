@@ -37,6 +37,11 @@ export const Reparaciones = () => {
 
   }
 
+  const editarPublicacion = (idPublcacion) => {
+
+    navigate(`/reparacion/editar/${id}/${idPublcacion}`);
+
+  }
 
 
   useEffect(() => {
@@ -88,23 +93,23 @@ export const Reparaciones = () => {
                     <table className="table table-dark">
                       <thead>
                         <tr>
-                          <th className="col-2">id</th>
-                          <th className="col-7">Descripcion</th>
-                          <th className="col-2">Precio</th>
-                          <th className="col-1">Accion</th>
+                          <th>id</th>
+                          <th>Descripcion</th>
+                          <th>Precio</th>
+                          <th>Accion</th>
                         </tr>
                       </thead>
                       <tbody>
                         {dataMuro.map((item) => (
                           <tr>
                             <td className="col-2">{item.id}</td>
-                            <td className="col-8">
+                            <td className="col-6">
                               {item.detalle_reparacion}
                             </td>
                             <td className="col-2">{item.precio} </td>
-                            <td className="col-1">
+                            <td className="col-2">
                               <button onClick={() => borraPublicacion(item.id)} className="btn btn-danger mx-2" >Borrar</button>
-
+                              <button onClick={() => editarPublicacion(item.id)} className="btn btn-warning" >Editar</button>
                             </td>
                           </tr>
                         ))}

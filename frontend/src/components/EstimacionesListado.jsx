@@ -109,7 +109,7 @@ export const EstimacionesListado = () => {
           <tbody>
             {dataMuro.map((item) => (
               <tr>
-                <td className="col-1">{item.id}</td>
+                <td key={item.id} className="col-1">{item.id}</td>
                 <td className="col-1">{item.placa}</td>
                 <td className="col-2">{item.asegurado}</td>
                 <td className="col-3">{item.estimado_por}</td>

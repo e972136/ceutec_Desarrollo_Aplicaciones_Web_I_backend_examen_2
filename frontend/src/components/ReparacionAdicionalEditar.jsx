@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const ReparacionAdicionalAgregar = () => {
-  const { id } = useParams();
+export const ReparacionAdicionalEditar = () => {
   const navigate = useNavigate();
+
+  const { id ,idPublcacion } = useParams();
+  
 
   const [form, setForm] = useState({
     estimacion_id: 0,
@@ -19,34 +21,48 @@ export const ReparacionAdicionalAgregar = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const submitHandler = async () => {
-    const url = "http://localhost:9090/api/reparacion-adicional";
 
-    event.preventDefault();
+  const getDatos = async () => {
+    const url = `http://localhost:9090/api/reparacion-adicional/individual/${idPublcacion}`;
+    const response = await axios.get(url);
+    const datos = (await response).data;
+    console.log(datos);
+    setForm(datos);        
+}
+  
 
-    /*    const datosFormulario = new FormData();
-    
-        datosFormulario.append("estimacion_id", id);
-        datosFormulario.append("detalle_reparacion", form.detalle_reparacion);
-        datosFormulario.append("precio", form.precio);*/
+const submitHandler = async () => {
+  const url = `http://localhost:9090/api/reparacion-adicional/${idPublcacion}`;
+
+  event.preventDefault();
+
+  /*    const datosFormulario = new FormData();
+  
+      datosFormulario.append("estimacion_id", id);
+      datosFormulario.append("detalle_reparacion", form.detalle_reparacion);
+      datosFormulario.append("precio", form.precio);*/
 
 
-    const data = {
-      estimacion_id: id,
-      reparacion_adicional_detalle: form.reparacion_adicional_detalle,
-      valor_reparacion: form.valor_reparacion,
-      tipo: form.tipo
-    }
+  const data = {
+    estimacion_id: id,
+    reparacion_adicional_detalle: form.reparacion_adicional_detalle,
+    valor_reparacion: form.valor_reparacion,
+    tipo: form.tipo
+  }
 
 
-    console.log(data);
+  console.log(data);
 
-    const result = await axios.post(url, data);
-    const resultData = (await result).data;
-    console.log(resultData);
-    //navigate(`/reparaciones/${id}`);
-    window.location.reload(false);
-  };
+  const result = await axios.put(url, data);
+  const resultData = (await result).data;
+  console.log(resultData);
+  navigate(`/reparacion_adicional/${id}`);
+  
+};
+
+useEffect(() => {
+    getDatos();        
+  }, []);
 
   return (
     <>
@@ -62,6 +78,7 @@ export const ReparacionAdicionalAgregar = () => {
                   className="form-control"
                   type="text"
                   name="reparacion_adicional_detalle"
+                  value={form.reparacion_adicional_detalle}
                   onChange={onChangeHandler}
                 />
               </div>
@@ -74,6 +91,7 @@ export const ReparacionAdicionalAgregar = () => {
                   type="number"
                   step="0.01"
                   name="valor_reparacion"
+                  value={form.valor_reparacion}
                   onChange={onChangeHandler}
                 />
               </div>
@@ -85,6 +103,7 @@ export const ReparacionAdicionalAgregar = () => {
                   className="custom-select"
                   name="tipo"
                   id="tipo"
+                  value={form.tipo}
                   onChange={onChangeHandler}
                 >
                   <option value="Normal">Normal</option>
@@ -95,7 +114,7 @@ export const ReparacionAdicionalAgregar = () => {
               </div>
 
               <button type="submit" className="btn btn-primary col-2">
-                Agregar
+                Actualizar
               </button>
             </div>
 

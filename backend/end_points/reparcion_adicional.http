@@ -5,6 +5,10 @@ GET http://localhost:9090/api/reparacion-adicional
 #### reparaciones por estimacion
 GET http://localhost:9090/api/reparacion-adicional/1
 
+#### reparaciones por estimacion
+GET http://localhost:9090/api/reparacion-adicional/individual/1
+
+
 ### Agregar reparacion
 POST http://localhost:9090/api/reparacion-adicional
 Content-Type: application/json

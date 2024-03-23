@@ -14,11 +14,27 @@ const getRepuestosPorEstimacion= async (req, res)=>{
     const {estimacion_id} = req.params;
     
 
-    const sql = `select  * from repuesto where repuesto.estimacion_id = ${estimacion_id}`;
+    const sql = `select  * 
+    from repuesto 
+    where repuesto.estimacion_id = ${estimacion_id}
+    order by id`;
     const resultRepuesto = await db.query(sql);
 
     res.json(resultRepuesto);
 };
+
+const getRespuestoIndividual = async (req, res) => {
+    const { id } = req.params;
+
+    const sql = `select * from repuesto where id = ${id}`;
+
+    const resultadoRepuesto = await db.query(sql);
+
+
+    res.json(resultadoRepuesto[0]) ;
+
+
+}
 
 const postRepuesto = async (req, res)=>{
 
@@ -87,6 +103,7 @@ export {
     postRepuesto,
     getRepuesto, 
     getRepuestosPorEstimacion,   
+    getRespuestoIndividual,
     putRepuesto,
     delRepuesto
 };
