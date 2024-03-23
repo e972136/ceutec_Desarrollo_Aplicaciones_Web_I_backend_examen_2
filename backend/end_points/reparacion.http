@@ -27,4 +27,4 @@ Content-Type: application/json
 
 
 #### Borrar reparacion
-DELETE http://localhost:9090/api/reparacion/1
+DELETE http://localhost:9090/api/reparacion/21
