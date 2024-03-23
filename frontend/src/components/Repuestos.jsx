@@ -79,7 +79,7 @@ export const Repuestos = () => {
 
                 <div className="col-12">
                   <fieldset>
-                    <table>
+                    <table className="table table-dark">
                       <thead>
                         <tr>
                           <th className="col-2">id</th>
