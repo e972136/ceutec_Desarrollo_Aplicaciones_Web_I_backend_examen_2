@@ -46,21 +46,34 @@ const getEstimacionById = async (req, res) => {
     const km=100;
     const implementado_por = resultEstimacion.estimado_por;
 
-
+    // REPARACION
     const sqlReparacion = `select * from reparacion where reparacion.estimacion_id = ${id}`;
     const reparacion = await db.query(sqlReparacion);
 
     const sqlTotalReparaciones = `select sum(precio) as t from reparacion where reparacion.estimacion_id = ${id}`;
     const totalReparacionesResponse = await db.query(sqlTotalReparaciones);
     const totalReparacionesResult = totalReparacionesResponse[0];
-    const total_Reparaciones = totalReparacionesResult.t;
+    const total_Reparaciones = totalReparacionesResult.t === null ? "0.00" : totalReparacionesResult.t ;
 
 
+    // REPARACION ADICIONAL
     const sqlReparacion_adicional = `select * from reparacion_adicional where reparacion_adicional.estimacion_id = ${id}`;
     const reparacion_adicional = await db.query(sqlReparacion_adicional);
 
+    const sqlTotal_reparacion_adicional = `select sum(valor_reparacion) as t from reparacion_adicional where reparacion_adicional.estimacion_id = ${id}`;
+    const total_reparacion_adicional_response = await db.query(sqlTotal_reparacion_adicional);
+    const total_reparacion_adicional_result = total_reparacion_adicional_response[0];
+    const total_reparacion_adicional = total_reparacion_adicional_result.t === null ? "0.00" : total_reparacion_adicional_result.t ;
+
+    // REPUESTO
     const sqlRepuesto = `select * from repuesto where repuesto.estimacion_id = ${id}`;
     const repuesto = await db.query(sqlRepuesto);
+
+    const sqlTotal_repuestos = `select sum(precio) as t from repuesto where repuesto.estimacion_id = ${id}`;
+    const total_repuestos_response = await db.query(sqlTotal_repuestos);
+    const total_repuestos_result = total_repuestos_response[0];
+    const total_repuestos = total_repuestos_result.t === null ? "0.00" : total_repuestos_result.t;
+
 
     const elemento = {
         id,
@@ -75,8 +88,10 @@ const getEstimacionById = async (req, res) => {
         anio_vehiculo,
         vin_o_serie,
         obs,
-        reparacion,
         total_Reparaciones,
+        total_repuestos,
+        total_reparacion_adicional,
+        reparacion,
         reparacion_adicional,
         repuesto,
         km,

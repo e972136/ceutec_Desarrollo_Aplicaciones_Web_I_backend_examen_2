@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const EstimacionesListado = () => {
-  const [dataMuro, setDataMuro] = useState([]);
+  const [dataMuro, setDataMuro] = useState([]);  
 
   const navigate = useNavigate();
 
@@ -22,7 +22,10 @@ export const EstimacionesListado = () => {
     navigate(`/estimaciones/editar/${idPublcacion}`);
   };
 
+
+  
   const crearEstimacionHandler = async () => {
+
     const url = "http://localhost:9090/api/estimacion";
 
     event.preventDefault();
@@ -38,15 +41,16 @@ export const EstimacionesListado = () => {
       color: "",
       anio_vehiculo: "",
       vin_o_serie: "",
-      obs: ""    
+      obs: "",    
     };
     
 
     const result = await axios.post(url, data);
-    const resultData = (await result).data;
-    console.log(resultData);    
+    const resultData = result.data;
+    const obtenido = resultData[0];        
 
-    navigate(`/estimaciones/editar/${resultData.id}`);
+    navigate(`/estimaciones/editar/${obtenido.id}`);
+
   };
 
   // siempre se ejecuta cada vez que se renderiza el componente

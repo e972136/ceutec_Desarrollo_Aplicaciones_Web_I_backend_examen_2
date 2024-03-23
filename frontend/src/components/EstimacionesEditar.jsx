@@ -28,7 +28,17 @@ export const EstimacionesEditar = () => {
     km: "",
     implementado_por: "",
     total_Reparaciones: 0.0,
+    total_repuestos: 0.0,
+    total_reparacion_adicional: 0.0,
   });
+
+  const handlerChange = (event)=>{
+
+    const { name , value } = event.target
+
+    setDataForm({...dataForm,  [name]:value });
+
+  }
 
   const getDatos = async () => {
     const url = `http://localhost:9090/api/estimacion/${id}`;
@@ -72,7 +82,7 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="estimacion"
-                      value={dataForm.id}
+                      value={dataForm.id}                      
                       readOnly
                     />
                   </div>
@@ -85,6 +95,8 @@ export const EstimacionesEditar = () => {
                       type="date"
                       className="form-control"
                       id="fechaEvaluacion"
+                      name="fecha_evaluacion"
+                      onChange={handlerChange}
                       value={dataForm.fecha_evaluacion}
                     />
                   </div>
@@ -109,6 +121,8 @@ export const EstimacionesEditar = () => {
                       className="form-control"
                       id="asegurado"
                       autoComplete="on"
+                      name="asegurado"
+                      onChange={handlerChange}
                       value={dataForm.asegurado}
                     />
                   </div>
@@ -121,6 +135,8 @@ export const EstimacionesEditar = () => {
                       className="form-control"
                       id="aseguradora"
                       autoComplete="on"
+                      onChange={handlerChange}
+                      name="aseguradora_id"
                       value={dataForm.aseguradora_id}
                     />
                   </div>
@@ -132,6 +148,8 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="estimadoPor"
+                      onChange={handlerChange}
+                      name="estimado_por"
                       value={dataForm.estimado_por}
                     />
                   </div>
@@ -147,6 +165,8 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="placa"
+                      onChange={handlerChange}
+                      name="placa"
                       value={dataForm.placa}
                     />
                   </div>
@@ -161,6 +181,8 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="marca"
+                      onChange={handlerChange}
+                      name="marca"
                       value={dataForm.marca}
                     />
                   </div>
@@ -173,6 +195,8 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="modelo"
+                      onChange={handlerChange}
+                      name="modelo"
                       value={dataForm.modelo}
                     />
                   </div>
@@ -185,6 +209,8 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="anioVehiculo"
+                      onChange={handlerChange}
+                      name="anio_vehiculo"
                       value={dataForm.anio_vehiculo}
                     />
                   </div>
@@ -197,6 +223,8 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="colorVehiculo"
+                      onChange={handlerChange}
+                      name="color"
                       value={dataForm.color}
                     />
                   </div>
@@ -209,6 +237,8 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="kM"
+                      onChange={handlerChange}
+                      name="km"
                       value={dataForm.km}
                     />
                   </div>
@@ -221,6 +251,8 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="vinOSerie"
+                      onChange={handlerChange}
+                      name="vin_o_serie"
                       value={dataForm.vin_o_serie}
                     />
                   </div>
@@ -237,6 +269,7 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="totalRepuestos"
+                      value={dataForm.total_repuestos}
                       disabled
                     />
                   </div>
@@ -290,6 +323,7 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control "
                       id="totalReparacionesAdicionales"
+                      value={dataForm.total_reparacion_adicional}                      
                       disabled
                     />
                   </div>
