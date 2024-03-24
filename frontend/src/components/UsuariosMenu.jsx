@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 //rafc para crear nuevo
 
@@ -16,10 +17,17 @@ export const UsuariosMenu = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item ">
-                        <a href="/usuarios/crear" className="btn btn-primary ">
-                            Agregar Usuario <i className="fa fa-plus-square" aria-hidden="true"></i>
-                        </a>
-                    </li>                           
+                        <Link to="/usuarios/crear" className="btn btn-primary ml-3 btn-lg">
+                            Agregar Usuario <i className="fa fa-plus-square" aria-hidden="true"></i>    
+                        </Link>
+                    </li>             
+
+                    <li className="nav-item ">
+                        <Link to="/usuarios/listar" className="btn btn-info  ml-3 btn-lg">
+                            Listar Usuarios <i className="fa fa-plus-square" aria-hidden="true"></i>    
+                        </Link>
+                    </li>    
+                    
                 </ul>
             </div>
         </nav>

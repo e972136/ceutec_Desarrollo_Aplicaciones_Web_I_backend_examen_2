@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { Aseguradoras } from './Aseguradoras'
 import { UsuariosMenu } from "./UsuariosMenu";
 
 export const UsuariosCrear = () => {
@@ -10,14 +10,15 @@ export const UsuariosCrear = () => {
 
   const [dataForm, setDataForm] = useState({
     nombre: "",
+    imagen: "",
     clave: "",
-    foto_perfil: ""
+    
   });
 
   const onChangeHandler = () => {
     const { name, value } = event.target;
     
-    if (name === "foto_perfil") {
+    if (name === "imagen") {
 
       const img = event.target.files[0];
       setDataForm({ ...dataForm, [name]: img });
@@ -31,14 +32,15 @@ export const UsuariosCrear = () => {
   const [crearUsuario, setCrearUsuario] = useState("");
 
   const submitHandler = async () => {
-    const url = "http://localhost:4000/api/publicacion";    
+    const url = "http://localhost:9090/api/usuario";    
     event.preventDefault();
 
-    const datosFormulario = new FormData();
-    
-    datosFormulario.append( "nombre" , dataForm.nombre_usuario);
-    datosFormulario.append( "clave" , dataForm.caption);
-    datosFormulario.append( "foto_perfil" , dataForm.imagen);
+    const datosFormulario = new FormData();    
+    datosFormulario.append( "nombre" , dataForm.nombre);
+    datosFormulario.append( "clave" , dataForm.clave);
+    datosFormulario.append( "imagen" , dataForm.imagen);
+
+
 
     try{
       const result  = await axios.post(url, datosFormulario);
@@ -54,6 +56,7 @@ export const UsuariosCrear = () => {
 
   return (
     <>
+    <Aseguradoras />
     <UsuariosMenu />
       <div className="container">
         <legend>Creacion de Usuarios</legend>
@@ -83,12 +86,12 @@ export const UsuariosCrear = () => {
               <input
                 className="form-control "
                 type="file"
-                name="foto_perfil"
+                name="imagen"
                 onChange={onChangeHandler}
               />
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary btn-lg">
               Crear Usuario
             </button>
           </fieldset>

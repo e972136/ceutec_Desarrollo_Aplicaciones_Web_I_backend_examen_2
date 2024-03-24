@@ -1,16 +1,39 @@
 import { db } from '../db/conn.js';
 
 const postUsuario = async (req, res)=>{
-    const {nombre} = req.body;
+    const {nombre,clave} = req.body;
+    console.log(nombre);
+    console.log(clave);
+    const {
+        buffer,
+        mimetype,
+        originalname
+    } = req.file;
+    const params = [nombre,clave,buffer,mimetype,originalname];    
 
-    const params = [nombre];
-
-    const sql = `insert into aseguradora(nombre) values ($1) returning * `;
-    const result = await db.query(sql,params);
-
-    res.json(result);
+    try{
+        const sql = `insert into usuario(nombre,clave,imagen,mime_type,nombre_archivo) 
+        values ($1,$2,$3,$4,$5) returning id,nombre,'Exito' mensaje `;
+        const result = await db.query(sql,params);    
+        res.json(result);
+    }catch (err) {
+        res.status(500).json({ mensaje: err.message });
+    }
 
 };
+
+const obtenerUsuarios = async (req, res) => {
+    const sql = `select  
+        id,
+        nombre,
+        encode(imagen, 'base64') imagen,
+        mime_type,
+        nombre_archivo
+    from usuario`;
+    const resultRepuesto = await db.query(sql);
+
+    res.json(resultRepuesto);
+}
 
 const validaUsuario = async (req, res) => {
     
@@ -37,5 +60,6 @@ const validaUsuario = async (req, res) => {
 
 export {
     postUsuario,
-    validaUsuario
+    validaUsuario,
+    obtenerUsuarios
 };

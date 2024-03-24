@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Aseguradoras } from './Aseguradoras'
 
 export const EstimacionesListado = () => {
   const [dataMuro, setDataMuro] = useState([]);  
@@ -61,6 +62,7 @@ export const EstimacionesListado = () => {
 
   return (
     <>
+    <Aseguradoras />
       <div className="container-fluid">
         <h1>Estimaciones</h1>
         <form action="" method="get" autoComplete="off">
@@ -81,17 +83,12 @@ export const EstimacionesListado = () => {
           </div>
         </form>
 
-        <a href="/estimaciones/crear" className="btn btn-success ">
-          Agregar Estimacion href{" "}
-          <i className="fa fa-plus-square" aria-hidden="true"></i>
-        </a>
-
         <button
           onClick={crearEstimacionHandler}
           className="btn btn-success"
           type="button"
         >
-          Agregar Estimacion handler
+          Agregar Estimacion
           <i className="fa fa-plus-square" aria-hidden="true"></i>
         </button>
 
@@ -111,24 +108,15 @@ export const EstimacionesListado = () => {
               <tr>
                 <td key={item.id} className="col-1">{item.id}</td>
                 <td className="col-1">{item.placa}</td>
-                <td className="col-2">{item.asegurado}</td>
-                <td className="col-3">{item.estimado_por}</td>
+                <td className="col-4">{item.asegurado}</td>
+                <td className="col-4">{item.estimado_por}</td>
                 <td className="col-2">{item.fecha_evaluacion}</td>
-                <td className="col-1">
-                  <a
-                    href={"/estimaciones/editar/" + item.id}
-                    className="btn btn-warning"
-                  >
-                    Editar/link
-                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  </a>
-                </td>
                 <td className="col-1">
                   <button
                     onClick={() => editarPublicacion(item.id)}
-                    className="btn btn-warning mx-2"
+                    className="btn btn-warning "
                   >
-                    Editar/b
+                    Editar
                   </button>
                 </td>
               </tr>

@@ -1,20 +1,25 @@
--- Active: 1707761841846@@127.0.0.1@5432@estimaciones
+-- Active: 1705979042290@@localhost@5432@estimaciones
 
 CREATE TABLE aseguradora(
     id SERIAL NOT NULL PRIMARY KEY,
-    nombre VARCHAR(255)
+    nombre VARCHAR(255),
+    imagen bytea , 
+    mime_type varchar(500), 
+    nombre_archivo varchar(500)
 );
 
-ALTER TABLE aseguradora
-ADD logotipo bytea;
+
 
 
 CREATE TABLE usuario(
   id SERIAL NOT NULL PRIMARY KEY,
     nombre VARCHAR(255),
     clave  VARCHAR(255),
-    foto_perfil bytea
+    imagen bytea,
+      mime_type varchar(500), 
+    nombre_archivo varchar(500)
 );
+
 
 
 CREATE TABLE estimacion(  
@@ -35,6 +40,7 @@ CREATE TABLE estimacion(
         REFERENCES aseguradora(id)
 );
 
+
 CREATE TABLE reparacion(
     id SERIAL NOT NULL PRIMARY KEY,
     estimacion_id int,
@@ -44,6 +50,8 @@ CREATE TABLE reparacion(
       FOREIGN KEY(estimacion_id) 
         REFERENCES estimacion(id)
 );
+
+
 
 CREATE TABLE reparacion_adicional (
     id SERIAL NOT NULL PRIMARY KEY,
@@ -56,6 +64,7 @@ CREATE TABLE reparacion_adicional (
         REFERENCES estimacion(id)
 );
 
+
 CREATE TABLE repuesto(
    id SERIAL NOT NULL PRIMARY KEY,
     estimacion_id int,
@@ -65,6 +74,8 @@ CREATE TABLE repuesto(
       FOREIGN KEY(estimacion_id) 
         REFERENCES estimacion(id)
 );
+
+
 
 
 INSERT INTO usuario(nombre,clave)

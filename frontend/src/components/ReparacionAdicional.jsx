@@ -44,6 +44,11 @@ export const ReparacionAdicional = () => {
 
   }
 
+  const regresarHandler = () => {
+    navigate(`/estimaciones/editar/${id}`);
+  };
+
+
 
   useEffect(() => {
     getDatos();
@@ -53,9 +58,13 @@ export const ReparacionAdicional = () => {
     <>
 
       <div className="container-fluid">
-        <a href={"/estimaciones/editar/" + id} className="btn btn-primary">
+        <button
+          onClick={regresarHandler}
+          className="btn btn-primary  ml-3 btn-lg"
+          type="button"
+        >
           Regresar
-        </a>
+        </button>
         <div className="row">
           <div className="col">
             <div className="card">

@@ -1,7 +1,8 @@
 //rafc para crear nuevo
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+
 
 export const EstimacionesEditar = () => {
   const navigate = useNavigate();
@@ -34,12 +35,12 @@ export const EstimacionesEditar = () => {
 
   const [aseguradoras, setAseguradoras] = useState([]);
 
-  const handlerChange = (event)=>{
+  const handlerChange = (event) => {
 
-    const { name , value } = event.target
+    const { name, value } = event.target
 
-    setDataForm({...dataForm,  [name]:value });
-
+    setDataForm({ ...dataForm, [name]: value });
+    setGuardarEstimacion("...");
   }
 
   const getDatos = async () => {
@@ -50,8 +51,8 @@ export const EstimacionesEditar = () => {
     setDataForm(datos);
   };
 
-  const getAseguradoras = async () =>{
-    
+  const getAseguradoras = async () => {
+
     const url = `http://localhost:9090/api/aseguradora`;
     const response = await axios.get(url);
     const datos = (await response).data;
@@ -64,10 +65,10 @@ export const EstimacionesEditar = () => {
   const submitHandler = async () => {
     const url = `http://localhost:9090/api/estimacion/${id}`;
     event.preventDefault();
-    
-    
+
+
     const datosFormulario =
-    {    
+    {
       asegurado: dataForm.asegurado,
       estimado_por: dataForm.estimado_por,
       fecha_evaluacion: dataForm.fecha_evaluacion,
@@ -79,31 +80,32 @@ export const EstimacionesEditar = () => {
       anio_vehiculo: dataForm.anio_vehiculo,
       vin_o_serie: dataForm.vin_o_serie,
       obs: dataForm.obs
-  };
+    };
 
-   /*
-   const datosFormulario = new FormData();
-   datosFormulario.append("asegurado","y");
-    datosFormulario.append("estimado_por", "y");
-    datosFormulario.append("fecha_evaluacion", "2024-01-01");
-    datosFormulario.append("aseguradora_id", 1);
-    datosFormulario.append("placa", "y");
-    datosFormulario.append("marca", "y");
-    datosFormulario.append("modelo", "y");
-    datosFormulario.append("color", "y");
-    datosFormulario.append("anio_vehiculo", "y");
-    datosFormulario.append("vin_o_serie", "y");
-    datosFormulario.append("obs", "x");*/
+    /*
+    const datosFormulario = new FormData();
+    datosFormulario.append("asegurado","y");
+     datosFormulario.append("estimado_por", "y");
+     datosFormulario.append("fecha_evaluacion", "2024-01-01");
+     datosFormulario.append("aseguradora_id", 1);
+     datosFormulario.append("placa", "y");
+     datosFormulario.append("marca", "y");
+     datosFormulario.append("modelo", "y");
+     datosFormulario.append("color", "y");
+     datosFormulario.append("anio_vehiculo", "y");
+     datosFormulario.append("vin_o_serie", "y");
+     datosFormulario.append("obs", "x");*/
 
     console.log(datosFormulario);
-    try{
-      const result  = await axios.put(url, datosFormulario);
+    try {
+      const result = await axios.put(url, datosFormulario);
       const resultData = (await result).data;
-      const resultEstimacion = resultData[0];  
+      const resultEstimacion = resultData[0];
       const id = resultEstimacion.id;
-      console.log(id);      
-      navigate(`/estimaciones`);
-    }catch (err) {
+      console.log(id);
+      setGuardarEstimacion("");
+      //  navigate(`/estimaciones`);
+    } catch (err) {
       setGuardarEstimacion("Error Al guardar!");
     }
 
@@ -120,15 +122,12 @@ export const EstimacionesEditar = () => {
   return (
     <>
       <div className="container">
-        <a href="/estimaciones" className="btn btn-primary">
-          Regresar href
-        </a>
         <button
           onClick={regresarHandler}
-          className="btn btn-success"
+          className="btn btn-primary  ml-3 btn-lg"
           type="button"
         >
-          Regresar handler
+          Regresar
         </button>
 
         <div className="row">
@@ -136,6 +135,7 @@ export const EstimacionesEditar = () => {
             <div className="card">
               <div className="card-header">
                 <h3>EDITAR ESTIMACION</h3>
+                <div> {guardarEstimacion} </div>
               </div>
               <div className="card-body">
                 <form onSubmit={submitHandler} className="row">
@@ -148,7 +148,7 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control"
                       id="estimacion"
-                      value={dataForm.id}                      
+                      value={dataForm.id}
                       readOnly
                     />
                   </div>
@@ -199,20 +199,20 @@ export const EstimacionesEditar = () => {
                       <b>Aseguradora</b>
                     </label>
                     <select
-                    className="custom-select"
-                    name="aseguradora_id"
-                    id="aseguradora"
-                    value={dataForm.aseguradora_id}
-                    onChange={handlerChange}
+                      className="custom-select"
+                      name="aseguradora_id"
+                      id="aseguradora"
+                      value={dataForm.aseguradora_id}
+                      onChange={handlerChange}
                     >
                       {
-                        aseguradoras.map((item)=>(
+                        aseguradoras.map((item) => (
                           <option key={item.id} value={item.id}>{item.nombre}</option>
                         ))
                       }
-                      </select>
+                    </select>
 
-{/*                    <input
+                    {/*                    <input
                       type="text"
                       className="form-control"
                       id="aseguradora"
@@ -359,16 +359,15 @@ export const EstimacionesEditar = () => {
                     />
                   </div>
                   <div className="col-6  mt-1">
-                    <a
-                      href={"/repuestos/" + dataForm.id}
-                      className="btn btn-warning form-control"
-                    >
-                      LISTA DE REPUESTOS NECESARIOS A REEMPLAZAR
-                      <i
+
+                    <Link to={"/repuestos/" + dataForm.id} className="btn btn-warning form-control">
+                      LISTA DE REPUESTOS NECESARIOS A REEMPLAZAR <i
                         className="fa fa-pencil-square-o"
                         aria-hidden="true"
                       ></i>
-                    </a>
+                    </Link>
+
+
                   </div>
 
                   <div className="col-3  mt-1">
@@ -386,16 +385,12 @@ export const EstimacionesEditar = () => {
                     />
                   </div>
                   <div className="col-6  mt-1">
-                    <a
-                      href={"/reparaciones/" + dataForm.id}
-                      className="btn btn-warning form-control"
-                    >
-                      LISTA DE REPARACIONES
-                      <i
+                    <Link to={"/reparaciones/" + dataForm.id} className="btn btn-warning form-control">
+                      LISTA DE REPARACIONES <i
                         className="fa fa-pencil-square-o"
                         aria-hidden="true"
                       ></i>
-                    </a>
+                    </Link>
                   </div>
 
                   <div className="col-3  mt-1">
@@ -408,21 +403,19 @@ export const EstimacionesEditar = () => {
                       type="text"
                       className="form-control "
                       id="totalReparacionesAdicionales"
-                      value={dataForm.total_reparacion_adicional}                      
+                      value={dataForm.total_reparacion_adicional}
                       disabled
                     />
                   </div>
                   <div className="col-6  mt-1 ">
-                    <a
-                      href={"/reparacion_adicional/" + dataForm.id}
-                      className="btn btn-warning form-control"
-                    >
-                      LISTA DE REPARACIONES ADICIONALES
-                      <i
+
+                    <Link to={"/reparacion_adicional/" + dataForm.id} className="btn btn-warning form-control">
+                      LISTA DE REPARACIONES ADICIONALES <i
                         className="fa fa-pencil-square-o"
                         aria-hidden="true"
                       ></i>
-                    </a>
+                    </Link>
+
                   </div>
 
                   <div className="col-12 mt-3">
@@ -433,7 +426,7 @@ export const EstimacionesEditar = () => {
                       Guardar Estimacion
                     </button>
                   </div>
-                
+
                 </form>
                 <div> {guardarEstimacion} </div>
               </div>

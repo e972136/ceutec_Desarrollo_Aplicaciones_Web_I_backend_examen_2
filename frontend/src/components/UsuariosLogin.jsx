@@ -2,7 +2,7 @@ import { useState } from "react";
 //rafc para crear nuevo
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { Aseguradoras } from './Aseguradoras'
 import { UsuariosMenu } from "./UsuariosMenu";
 
 export const UsuariosLogin = () => {
@@ -23,9 +23,9 @@ export const UsuariosLogin = () => {
 
   const submitHandler = async () => {
     event.preventDefault();
-    
+
     const url = `http://localhost:9090/api/usuario/auth/${dataForm.nombre}/${dataForm.clave}`;
-                 
+
 
     try {
       const result = await axios.get(url);
@@ -42,6 +42,7 @@ export const UsuariosLogin = () => {
 
   return (
     <>
+      <Aseguradoras />
       <UsuariosMenu />
       <div className="container">
         <legend>Inicio de Sesion</legend>
