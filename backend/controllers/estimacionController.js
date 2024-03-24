@@ -28,12 +28,13 @@ const getEstimacionById = async (req, res) => {
     const params =[        
         id
     ]; 
-    const sql = `select  * from estimacion where id = $1`;
+    const sql = `select to_char(fecha_evaluacion, 'YYYY-MM-DD') as fecha_txt, estimacion.* from estimacion where id = $1`;
     const resultEstimacionSql = await db.query(sql,params);
 
     const resultEstimacion = resultEstimacionSql[0];    
-    const asegurado = resultEstimacion.asegurado;
+    const asegurado = resultEstimacion.asegurado;    
     const estimado_por= resultEstimacion.estimado_por;
+    const fecha_txt = resultEstimacion.fecha_txt;
     const fecha_evaluacion= resultEstimacion.fecha_evaluacion;
     const aseguradora_id= resultEstimacion.aseguradora_id;
     const placa= resultEstimacion.placa;
@@ -80,6 +81,7 @@ const getEstimacionById = async (req, res) => {
         asegurado,
         estimado_por,
         fecha_evaluacion,
+        fecha_txt,
         aseguradora_id,
         placa,
         marca,
@@ -107,7 +109,7 @@ const getEstimacionById = async (req, res) => {
 const getEstimacion = async (req, res)=>{
     
 
-    const sql = `select  aseguradora.nombre as nombre_aseguradora, estimacion.* from estimacion
+    const sql = `select  aseguradora.nombre as nombre_aseguradora,to_char(fecha_evaluacion, 'YYYY-MM-DD') as fecha_txt,   estimacion.* from estimacion
                 inner join aseguradora on aseguradora.id = estimacion.aseguradora_id
                 order by estimacion.id desc`;
     const resultEstimacion = await db.query(sql);

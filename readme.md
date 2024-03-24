@@ -1,10 +1,19 @@
+## Video
+
+* [Ver video](https://youtu.be/gMpwyIZ2gd4)
+
 ## Descripcion
-Tanto fron como bac estan en el mismo repositorio, pero tienen carpetas independientes
+
+* Tanto el front como back estan en el mismo repositorio, pero tienen carpetas independientes
 
 ## Ejecutar
-Al descargar, debe abrir cada carpeta en su propio code, y ejecutar npm install npm run dev
 
+* Al descargar, debe abrir cada carpeta por separado
+* Luego abrir cada carpete en el code
+* Ejecutar npm install en cada uno
+* Ejecutar npm run dev
 
+### Me gustaria aprender hacer modal, para la siguiente clase, para usarla para agregar las aseguradoras, que tiene poca informacion.  
 
 
 ## Comandos utiles

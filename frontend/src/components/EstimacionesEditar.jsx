@@ -18,6 +18,7 @@ export const EstimacionesEditar = () => {
     asegurado: "",
     estimado_por: "",
     fecha_evaluacion: "",
+    fecha_txt: "",
     aseguradora_id: "2",
     placa: "",
     marca: "",
@@ -71,7 +72,7 @@ export const EstimacionesEditar = () => {
     {
       asegurado: dataForm.asegurado,
       estimado_por: dataForm.estimado_por,
-      fecha_evaluacion: dataForm.fecha_evaluacion,
+      fecha_evaluacion: dataForm.fecha_txt,
       aseguradora_id: dataForm.aseguradora_id,
       placa: dataForm.placa,
       marca: dataForm.marca,
@@ -161,9 +162,9 @@ export const EstimacionesEditar = () => {
                       type="date"
                       className="form-control"
                       id="fechaEvaluacion"
-                      name="fecha_evaluacion"
+                      name="fecha_txt"
                       onChange={handlerChange}
-                      value={dataForm.fecha_evaluacion}
+                      value={dataForm.fecha_txt}
                     />
                   </div>
                   <div className="col-6">

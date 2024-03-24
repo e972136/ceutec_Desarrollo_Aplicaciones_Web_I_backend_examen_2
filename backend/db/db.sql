@@ -1,5 +1,17 @@
 -- Active: 1705979042290@@localhost@5432@estimaciones
 
+drop table reparacion;
+
+drop table reparacion_adicional;
+
+drop table repuesto;
+
+drop table estimacion;
+
+drop table usuario;
+
+drop table aseguradora;
+
 CREATE TABLE aseguradora(
     id SERIAL NOT NULL PRIMARY KEY,
     nombre VARCHAR(255),

@@ -43,10 +43,10 @@ export const UsuariosListar = () => {
                             {
                                 dataMuro.map(item => (
                                     <tr>
-                                        <td key={item.id}>{item.id}</td>
-                                        <td >{item.nombre}</td>
-                                        <td>
-                                            <img src={`data:${item.mime_type};base64,${item.imagen}`} style={{ height: '150px' }} />
+                                        <td key={item.id} className="col-1 btn-lg">{item.id}</td>
+                                        <td className="col-5 btn-lg">{item.nombre}</td>
+                                        <td className="col-6">
+                                            <img src={`data:${item.mime_type};base64,${item.imagen}`} style={{ height: '200px' }} />
                                         </td>
                                     </tr>
 

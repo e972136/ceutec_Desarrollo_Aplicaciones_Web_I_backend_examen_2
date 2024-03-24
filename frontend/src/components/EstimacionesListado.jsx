@@ -95,12 +95,13 @@ export const EstimacionesListado = () => {
         <table className="table table-dark table-striped">
           <thead>
             <tr className="bg-dark text-white">
-              <th className="col-1">Est</th>
-              <th className="col-1">Placa</th>
-              <th className="col-3">Asegurado</th>
-              <th className="col-3">Estimado por</th>
-              <th className="col-2">Fecha</th>
-              <th className="col-2">Acciones</th>
+              <th >Est</th>
+              <th >Placa</th>
+              <th >Asegurado</th>
+              <th >Aseguradora</th>
+              <th >Estimado por</th>
+              <th >Fecha</th>
+              <th >Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -108,9 +109,10 @@ export const EstimacionesListado = () => {
               <tr>
                 <td key={item.id} className="col-1">{item.id}</td>
                 <td className="col-1">{item.placa}</td>
-                <td className="col-4">{item.asegurado}</td>
-                <td className="col-4">{item.estimado_por}</td>
-                <td className="col-2">{item.fecha_evaluacion}</td>
+                <td className="col-3">{item.asegurado}</td>
+                <td className="col-2">{item.nombre_aseguradora}</td>                
+                <td className="col-3">{item.estimado_por}</td>
+                <td className="col-2">{item.fecha_txt}</td>
                 <td className="col-1">
                   <button
                     onClick={() => editarPublicacion(item.id)}
